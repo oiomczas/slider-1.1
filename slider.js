@@ -102,7 +102,7 @@
     for (i = 0; i < max; i++) {
       dot = document.createElement('a');
       dot.textContent = i + 1;
-      dot.setAttribute('href', '#');
+      dot.setAttribute('href', images[i].src);
       dot.setAttribute('data-img', i);
       dot.addEventListener('click', changeImageDot);
       dot.classList.add('oiS-Dot');
@@ -113,7 +113,7 @@
       
   function changeImageDot(e) {  // zmiana obrazka po kliknieciu w kropke
     index = (e.target.dataset.img - 1);
-        
+    e.preventDefault();
     reUseFunctions();
   }
   //----------------------
