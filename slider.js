@@ -1,15 +1,14 @@
-(function () {
+var Slider = function (id) {
   'use strict';
-      
-      
+  
+  this.id = id;
+  
   var index = -1,
-    slider = document.querySelector('.oiS'),
+    slider = document.querySelector('.'+this.id),
     images = slider.querySelectorAll('img'),
     timer =  setInterval(repeatByIntervalPart, 3000);
-    
-  
+    slider.classList.add('oiS');
   // pokaż ukryj kontrolki -----------------
-  
   slider.addEventListener('mouseenter', function () {
     var controlss = slider.querySelector('.oiS-Control-container');
     controlss.style.visibility = 'visible';
@@ -144,7 +143,7 @@
     next.addEventListener('click', nextChangeButton);
         
     slider.appendChild(container);
-    container = document.querySelector('.oiS-Control-container');
+    container = slider.querySelector('.oiS-Control-container');
     container.appendChild(prev);
     container.appendChild(next);
   }
@@ -170,13 +169,15 @@
   
   function createLinkCss() {
     var head = document.getElementsByTagName('head')[0],
-      style = document.createElement('link');
-    style.setAttribute('href', 'styleSlider.css');
+      style = document.createElement('link'),
+      styleName = 'styleSlider';
+    style.setAttribute('href', styleName + '.css');
     style.setAttribute('rel', 'stylesheet');
     head.appendChild(style);
   }
   // ---------------------------
   
+ 
   // funkcje wieloktotnego uzytku --------------------
   function repeatByIntervalPart() {
     procesImages(images, removeAtiveClass);
@@ -212,8 +213,26 @@
   
   //---------------------------------
   
-  init();
+  
+  return {
+    init: init
+  }
       
       
-      
-})();
+};
+
+
+var slider1 = new Slider('slider1');
+slider1.init();
+
+var slider2 = new Slider('slider2');
+slider2.init();
+
+var slider3 = new Slider('slider3');
+slider3.init();
+
+var slider4 = new Slider('slider4');
+slider4.init();
+
+var slider5 = new Slider('slider5');
+slider5.init();
