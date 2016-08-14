@@ -1,4 +1,4 @@
-var Slider = function (id) {
+var Slider = (function (id) {
   'use strict';
   
   this.id = id;
@@ -214,25 +214,24 @@ var Slider = function (id) {
   //---------------------------------
   
   
-  return {
-    init: init
-  }
+  init();
+  
       
       
-};
+});
 
 
 var slider1 = new Slider('slider1');
-slider1.init();
+
 
 var slider2 = new Slider('slider2');
-slider2.init();
+
 
 var slider3 = new Slider('slider3');
-slider3.init();
+
 
 var slider4 = new Slider('slider4');
-slider4.init();
+
 
 var slider5 = new Slider('slider5');
-slider5.init();
+
