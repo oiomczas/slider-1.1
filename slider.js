@@ -6,7 +6,7 @@
     slider = document.querySelector('.oiS'),
     images = slider.querySelectorAll('img'),
     timer =  setInterval(repeatByIntervalPart, 3000);
-      
+    
   
   // pokaż ukryj kontrolki -----------------
   
@@ -19,7 +19,14 @@
     var controlss = slider.querySelector('.oiS-Control-container');
     controlss.style.visibility = 'hidden';
   });
-      
+  
+  slider.addEventListener('keydown', function(e){
+    console.log(e.keyCode);
+    if(e.keyCode == 9){
+     var controlss = slider.querySelector('.oiS-Control-container');
+      controlss.style.visibility = 'visible';
+    }
+  })
   //-----------------------------------------
   
   
@@ -66,7 +73,7 @@
   // Operacje na ktopkach------------------
   
   function removeLightDot(dot) {   //usuwa poswietlenie
-    dot.className = 'oiS-Dot';
+    dot.classList.remove('oiS-Light');
   }
       
   function addLight(dot) {  //dodaje podswietlenie
@@ -88,24 +95,24 @@
   function createDots() {  // tworzy kropki
     var dotsDiv = document.createElement('div'),
       i,
-      max = images.length;
+      max = images.length,
+      dot;
     dotsDiv.classList.add('oiS-Dots');
     slider.appendChild(dotsDiv);
-    var dots = document.querySelector('.oiS-Dots');
     for (i = 0; i < max; i++) {
-      var dot = document.createElement('a');
+      dot = document.createElement('a');
       dot.textContent = i + 1;
       dot.setAttribute('href', '#');
       dot.setAttribute('data-img', i);
       dot.addEventListener('click', changeImageDot);
       dot.classList.add('oiS-Dot');
-      dots.appendChild(dot);
+      dotsDiv.appendChild(dot);
     }
         
   }
       
   function changeImageDot(e) {  // zmiana obrazka po kliknieciu w kropke
-    index = (this.dataset.img - 1);
+    index = (e.target.dataset.img - 1);
         
     reUseFunctions();
   }
@@ -119,17 +126,19 @@
   
  // Tworzy kontrolki ----------------------
       
-  function createControl() {   
-    var container = document.createElement('div');
+  function createControl() {
+    var container = document.createElement('div'),
+      prev,
+      next;
     container.classList.add('oiS-Control-container');
         
-    var prev = document.createElement('button');
+    prev = document.createElement('button');
     prev.classList.add('oiS-Prev');
     prev.textContent = 'Prev';
     prev.addEventListener('click', prevChangeButton);
        
         
-    var next = document.createElement('button');
+    next = document.createElement('button');
     next.classList.add('oiS-Next');
     next.textContent = "Next";
     next.addEventListener('click', nextChangeButton);
@@ -159,7 +168,7 @@
   
  // dodaje style ---------------------------
   
-  function createLinkCss() {  
+  function createLinkCss() {
     var head = document.getElementsByTagName('head')[0],
       style = document.createElement('link');
     style.setAttribute('href', 'styleSlider.css');
